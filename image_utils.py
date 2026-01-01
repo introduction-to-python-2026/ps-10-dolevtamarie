@@ -4,7 +4,7 @@ from scipy.signal import convolve2d
 
 def load_image(path):
     img = Image.open(path).convert('L')
-    return np.array(img)
+    return np.array(img, dtype=np.uint8)
 
 def edge_detection(image):
     if image.ndim == 3:
@@ -22,9 +22,5 @@ def edge_detection(image):
         edge_magnitude = (edge_magnitude / edge_magnitude.max()) * 255
         
     return edge_magnitude.astype(np.uint8)
-    
-    if edge_magnitude.max() > 0:
-        edge_magnitude = (edge_magnitude / edge_magnitude.max()) * 255
         
-    return edge_magnitude.astype(np.uint8)
-    
+   
