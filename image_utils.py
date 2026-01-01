@@ -1,10 +1,12 @@
-from PIL import Image
 import numpy as np
 from scipy.signal import convolve2d
+from skimage import io, color
 
 def load_image(path):
-    img = Image.open(path).convert('L')
-    return np.squeeze(np.array(img))
+    img = io.imread(path)
+    if img.ndim == 3:
+        img = color.rgb2gray(img)
+    return (img * 255).astype(np.uint8)
 
 def edge_detection(image):
     if image.ndim > 2:
